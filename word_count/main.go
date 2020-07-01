@@ -47,7 +47,7 @@ var testCases = []struct {
 	}},
 }
 
-// WordCount : count word in a sentence
+// WordCount : count words in a sentence
 func WordCount(s string) map[string]int {
 
 	wc := make(map[string]int)
