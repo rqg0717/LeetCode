@@ -1,2 +1,2 @@
 # LeetCode
-LeetCode Questions and my solutions
+LeetCode Questions and my solutions in Golang
