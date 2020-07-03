@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 )
 
@@ -24,21 +25,66 @@ func dfs(root *TreeNode, min, max int) bool {
 		dfs(root.Right, root.Val, max)
 }
 
-func main() {
-	var node0, node1, node2, node3 TreeNode
-	// [3,1,4,null,null,2]
-	node0.Val = 3
-	node0.Left = &node1
-	node0.Right = &node2
-	node1.Val = 1
-	node1.Left = nil
-	node1.Right = nil
-	node2.Val = 4
-	node2.Left = &node3
-	node2.Right = nil
-	node3.Val = 2
-	node3.Left = nil
-	node3.Right = nil
+// Insert insets a node into a binary search tree
+func (bst *TreeNode) Insert(value int) error {
+	if bst == nil {
+		return errors.New("Tree is null")
+	}
 
-	fmt.Println("isValidBST? ", isValidBST(&node0))
+	if bst.Val == value {
+		return errors.New("This node already exists")
+	}
+
+	if bst.Val > value {
+		if bst.Left == nil {
+			bst.Left = &TreeNode{Val: value}
+			return nil
+		}
+		return bst.Left.Insert(value)
+	}
+
+	if bst.Val < value {
+		if bst.Right == nil {
+			bst.Right = &TreeNode{Val: value}
+			return nil
+		}
+		return bst.Right.Insert(value)
+	}
+	return nil
+}
+
+func main() {
+	t := &TreeNode{Val: 3}
+
+	err := t.Insert(6)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	err = t.Insert(1)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	err = t.Insert(5)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	err = t.Insert(2)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	err = t.Insert(7)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	err = t.Insert(4)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	fmt.Println("isValidBST? ", isValidBST(t))
 }
