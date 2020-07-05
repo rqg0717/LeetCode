@@ -19,22 +19,24 @@ func levelOrder(root *TreeNode) [][]int {
 	if root == nil {
 		return results
 	}
-
-	q := []*TreeNode{root}
-	for i := 0; len(q) > 0; i++ {
+	// start with the first level
+	first := []*TreeNode{root}
+	for i := 0; len(first) > 0; i++ {
 		results = append(results, []int{})
-		p := []*TreeNode{}
-		for j := 0; j < len(q); j++ {
-			node := q[j]
+		next := []*TreeNode{}
+		for j := 0; j < len(first); j++ {
+			node := first[j]
 			results[i] = append(results[i], node.Val)
+			// build the next level
 			if node.Left != nil {
-				p = append(p, node.Left)
+				next = append(next, node.Left)
 			}
 			if node.Right != nil {
-				p = append(p, node.Right)
+				next = append(next, node.Right)
 			}
 		}
-		q = p
+		// go to the next level
+		first = next
 	}
 
 	return results
