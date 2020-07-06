@@ -35,12 +35,48 @@ func inOrderTraversal(root *TreeNode) {
 	inOrderTraversal(root.Right)
 }
 
+func recoverTreeMorris(root *TreeNode) {
+	var first, second, last, prev *TreeNode
+	for root != nil {
+		if root.Left == nil {
+			if last != nil && root.Val <= last.Val {
+				if first == nil {
+					first = last
+				}
+				second = root
+			}
+			last = root
+			root = root.Right
+		} else {
+			prev = root.Left
+			if prev.Right != nil && prev.Right != root {
+				prev = prev.Right
+			}
+			if prev.Right != root {
+				prev.Right = root
+				root = root.Left
+			} else {
+				prev.Right = nil
+				if last != nil && root.Val <= last.Val {
+					if first == nil {
+						first = last
+					}
+					second = root
+				}
+				last = root
+				root = root.Right
+			}
+		}
+	}
+	first.Val, second.Val = second.Val, first.Val
+}
+
 func main() {
-	var node0, node1, node2, node3 TreeNode
+	var root, node1, node2, node3 TreeNode
 	// [3,1,4,null,null,2]
-	node0.Val = 3
-	node0.Left = &node1
-	node0.Right = &node2
+	root.Val = 3
+	root.Left = &node1
+	root.Right = &node2
 	node1.Val = 1
 	node1.Left = nil
 	node1.Right = nil
@@ -51,10 +87,11 @@ func main() {
 	node3.Left = nil
 	node3.Right = nil
 
-	fmt.Println("input: ", node0, node1, node2, node3)
+	fmt.Println("input: ", root, node1, node2, node3)
 
-	recoverTree(&node0)
+	//recoverTree(&root)
+	recoverTreeMorris(&root)
 
-	fmt.Println("output: ", node0, node1, node2, node3)
+	fmt.Println("output: ", root, node1, node2, node3)
 
 }

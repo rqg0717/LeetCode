@@ -43,27 +43,32 @@ func levelOrder(root *TreeNode) [][]int {
 }
 
 func main() {
-	var node0, node1, node2, node3, node4 TreeNode
 	// [3,9,20,null,null,15,7]
-	node0.Val = 3
-	node0.Left = &node1
-	node0.Right = &node2
-	node1.Val = 9
-	node1.Left = nil
-	node1.Right = nil
-	node2.Val = 20
-	node2.Left = &node3
-	node2.Right = &node4
-	node3.Val = 15
-	node3.Left = nil
-	node3.Right = nil
-	node4.Val = 7
-	node4.Left = nil
-	node4.Right = nil
+	root := TreeNode{}
+	node1 := TreeNode{}
+	node2 := TreeNode{}
+	node3 := TreeNode{}
+	node4 := TreeNode{}
 
-	fmt.Println("input: ", node0, node1, node2, node3, node4)
+	root.Val = 3
+	root.Left = &node1
+	root.Right = &node2
+	root.Left.Val = 9
+	root.Left.Left = nil
+	root.Left.Right = nil
+	root.Right.Val = 20
+	root.Right.Left = &node3
+	root.Right.Right = &node4
+	root.Right.Left.Val = 15
+	root.Right.Left.Left = nil
+	root.Right.Left.Right = nil
+	root.Right.Right.Val = 7
+	root.Right.Right.Left = nil
+	root.Right.Right.Right = nil
 
-	results := levelOrder(&node0)
+	fmt.Println("input: ", root, node1, node2, node3, node4)
+
+	results := levelOrder(&root)
 
 	fmt.Println("output: ", results)
 }
