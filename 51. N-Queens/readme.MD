@@ -1,6 +1,6 @@
 The n-queens puzzle is the problem of placing n queens on an n×n chessboard such that no two queens attack each other.
 
-
+(https://github.com/rqg0717/LeetCode/blob/master/51.%20N-Queens/8-queens.png)
 
 Given an integer n, return all distinct solutions to the n-queens puzzle.
 
