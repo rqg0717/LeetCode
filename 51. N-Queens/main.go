@@ -65,7 +65,46 @@ func printResults(results [][]int, n int) (res [][]string) {
 	return res
 }
 
+func solveNQueens1(n int) [][]string {
+	var res [][]string
+	board := make([][]byte, n)
+	for i := 0; i < n; i++ {
+		board[i] = make([]byte, n)
+		for j := 0; j < n; j++ {
+			board[i][j] = '.'
+		}
+	}
+
+	columns, leftright, rightleft := 0, 0, 0
+	var dfs func(row int)
+	dfs = func(row int) {
+		if row == n {
+			var temp []string
+			for _, v := range board {
+				temp = append(temp, string(v))
+			}
+			res = append(res, temp)
+			return
+		}
+
+		available := ((1 << n) - 1) & ^(columns | (leftright >> row) | (rightleft >> (n - 1 - row)))
+		for available != 0 {
+			p := available & -available
+			available = available &^ p
+			temp, col := p, 0
+			for temp != 1 {
+				temp, col = temp>>1, col+1
+			}
+			board[row][col], columns, leftright, rightleft = 'Q', columns|p, leftright|(p<<row), rightleft|(p<<(n-1-row))
+			dfs(row + 1)
+			board[row][col], columns, leftright, rightleft = '.', columns&^p, leftright&^(p<<row), rightleft&^(p<<(n-1-row))
+		}
+	}
+	dfs(0)
+	return res
+}
+
 func main() {
 	n := 4
-	fmt.Println("Output:", solveNQueens(n))
+	fmt.Println("Output:", solveNQueens1(n))
 }
