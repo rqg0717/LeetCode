@@ -16,7 +16,7 @@ func solveNQueens(n int) [][]string {
 }
 
 func dfs(rows []int, n int, columns, leftright, rightleft int, results *[][]int) {
-	// end condition
+	// end condition for one solution
 	if len(rows) == n {
 		sub := make([]int, n)
 		copy(sub, rows)
@@ -30,19 +30,18 @@ func dfs(rows []int, n int, columns, leftright, rightleft int, results *[][]int)
 		-a = 0b00010000
 		(a & -a) = 0b00010000
 	*/
-	a := (^(columns | leftright | rightleft)) & ((1 << uint(n)) - 1) // currently available columns
+	a := (^(columns | leftright | rightleft)) & ((1 << uint(n)) - 1) // currently available columns marked as 1
 	for a != 0 {
-		i := a & (-a)
+		i := a & (-a) // obtains the next available column
 		a ^= i
 		cols := 0
 		j := (1 << uint(n-1))
+		// checks every column
 		for i&j == 0 {
 			cols++
-			j >>= 1
+			j >>= 1 // moves to next column
 		}
 		// moves to next row
-		// leftright [0, 1] to [1, 2]
-		// rightleft [0, 2] to [1, 1]
 		dfs(append(rows, cols), n, columns^i, (leftright^i)>>1, (rightleft^i)<<1, results)
 	}
 }
