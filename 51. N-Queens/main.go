@@ -66,7 +66,7 @@ func printResults(results [][]int, n int) (res [][]string) {
 }
 
 func solveNQueens1(n int) [][]string {
-	var res [][]string
+	var results [][]string
 	board := make([][]byte, n)
 	for i := 0; i < n; i++ {
 		board[i] = make([]byte, n)
@@ -83,7 +83,7 @@ func solveNQueens1(n int) [][]string {
 			for _, v := range board {
 				temp = append(temp, string(v))
 			}
-			res = append(res, temp)
+			results = append(results, temp)
 			return
 		}
 
@@ -101,7 +101,7 @@ func solveNQueens1(n int) [][]string {
 		}
 	}
 	dfs(0)
-	return res
+	return results
 }
 
 func main() {
