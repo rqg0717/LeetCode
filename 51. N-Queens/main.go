@@ -24,9 +24,15 @@ func dfs(rows []int, n int, columns, leftright, rightleft int, results *[][]int)
 		return
 	}
 
-	isEmpty := (^(columns | leftright | rightleft)) & ((1 << uint(n)) - 1)
-	for isEmpty != 0 {
-		i := isEmpty & (-isEmpty)
+	/*
+		a := byte(0b11110000)
+		(^a) = 0b00001111
+		-a = 0b00010000
+		(a & -a) = 0b00010000
+	*/
+	a := (^(columns | leftright | rightleft)) & ((1 << uint(n)) - 1)
+	for a != 0 {
+		i := a & (-a)
 		cols := 0
 		j := (1 << uint(n-1))
 		for i&j == 0 {
@@ -34,7 +40,7 @@ func dfs(rows []int, n int, columns, leftright, rightleft int, results *[][]int)
 			j >>= 1
 		}
 		dfs(append(rows, cols), n, columns^i, (leftright^i)>>1, (rightleft^i)<<1, results)
-		isEmpty ^= i
+		a ^= i
 	}
 }
 
