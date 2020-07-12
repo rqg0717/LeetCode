@@ -12,7 +12,7 @@ func solveNQueens(n int) [][]string {
 	// Depth-First-Search
 	dfs([]int{}, n, 0, 0, 0, &results)
 	// print results
-	return generateResults(results, n)
+	return printResults(results, n)
 }
 
 func dfs(rows []int, n int, columns, leftright, rightleft int, results *[][]int) {
@@ -46,13 +46,13 @@ func dfs(rows []int, n int, columns, leftright, rightleft int, results *[][]int)
 	}
 }
 
-func generateResults(results [][]int, n int) (res [][]string) {
+func printResults(results [][]int, n int) (res [][]string) {
 	for _, r := range results {
-		var str []string
+		str := []string{}
 		for _, val := range r {
 			char := ""
-			for position := 0; position < n; position++ {
-				if position == val {
+			for p := 0; p < n; p++ {
+				if p == val {
 					char += "Q"
 				} else {
 					char += "."
@@ -66,6 +66,6 @@ func generateResults(results [][]int, n int) (res [][]string) {
 }
 
 func main() {
-	n := 8
+	n := 4
 	fmt.Println("Output:", solveNQueens(n))
 }
