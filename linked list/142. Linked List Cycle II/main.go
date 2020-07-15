@@ -21,6 +21,29 @@ func detectCycle(head *ListNode) *ListNode {
 	return nil
 }
 
+// Floyd
+func detectCycle1(head *ListNode) *ListNode {
+	slow, fast := head, head
+	for fast != nil && fast.Next != nil {
+		slow = slow.Next
+		fast = fast.Next.Next
+		// first intersection
+		if slow == fast {
+			// The slow pointer points to the initial position,
+			// and the pace of the fast pointer becomes the same as the slow pointer,
+			// so that the next intersection will be the tail connects to
+			slow = head
+			for slow != fast {
+				slow = slow.Next
+				fast = fast.Next
+			}
+			return fast
+		}
+	}
+
+	return nil
+}
+
 func main() {
 	node1 := &ListNode{Val: 3}
 	node2 := &ListNode{Val: 2}
@@ -34,5 +57,5 @@ func main() {
 
 	fmt.Println("input: ", *node1, *node2, *node3, *node4)
 
-	fmt.Println("Output: ", *detectCycle(node1))
+	fmt.Println("Output: ", *detectCycle1(node1))
 }
