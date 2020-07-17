@@ -10,15 +10,14 @@ type TreeNode struct {
 }
 
 func isSameTree(p *TreeNode, q *TreeNode) bool {
-	// both empty, same
 	if p == nil && q == nil {
 		return true
 	}
-	// one is empty, not the same
+
 	if p == nil || q == nil {
 		return false
 	}
-	// different values, not the same
+
 	if p.Val != q.Val {
 		return false
 	}

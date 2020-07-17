@@ -8,6 +8,7 @@ type ListNode struct {
 	Next *ListNode
 }
 
+// mapping
 func detectCycle(head *ListNode) *ListNode {
 	nodeMap := make(map[*ListNode]int)
 	current := head
