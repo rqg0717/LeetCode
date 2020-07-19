@@ -42,8 +42,26 @@ func maxProfit(prices []int) int {
 	return dp[n-1][2][0]
 }
 
+func maxProfit1(prices []int) int {
+	n := len(prices)
+	if n == 0 {
+		return 0
+	}
+
+	dp10, dp20 := 0, 0
+	dp11, dp21 := -prices[0], -prices[0]
+
+	for i := 0; i < n; i++ {
+		dp11 = max(dp11, -prices[i])
+		dp10 = max(dp10, dp11+prices[i])
+		dp21 = max(dp21, dp10-prices[i])
+		dp20 = max(dp20, dp21+prices[i])
+	}
+	return dp20
+}
+
 func main() {
 	prices := make([]int, 0)
-	prices = append(prices, 1, 2, 3, 4, 5)
-	fmt.Println("max profit: ", maxProfit(prices))
+	prices = append(prices, 3, 3, 5, 0, 0, 3, 1, 4)
+	fmt.Println("max profit: ", maxProfit1(prices))
 }
