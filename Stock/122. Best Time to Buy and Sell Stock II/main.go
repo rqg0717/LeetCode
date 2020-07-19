@@ -24,10 +24,10 @@ func maxProfit(prices []int) int {
 	dp1 := -prices[0]
 	for i := 0; i < len(prices); i++ {
 		temp := dp0
-		// today, do not have any stock
-		dp0 = max(dp0, dp1+prices[i]) // yesterday did not have/sold today
-		// today, have stock
-		dp1 = max(dp1, temp-prices[i]) // yesterday had stock/bought today
+		// i day, do not have any stock
+		dp0 = max(dp0, dp1+prices[i]) // i-1 day did not have/sold today
+		// i day, have stock
+		dp1 = max(dp1, temp-prices[i]) // i-1 day had stock/bought today
 	}
 	return dp0
 }
