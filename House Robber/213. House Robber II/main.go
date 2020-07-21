@@ -11,17 +11,19 @@ func max(x, y int) int {
 
 // dynamic programming
 // dp[i] the maximum amount of money of i rooms
-// three cases: 1. do not rob the first room and the last room
+// three cases: 1. do not rob the first room and the last room (covered by 2 and 3)
 //				2. rob the first room then do not rob the last room
 //				3. rob the last room then do not rob the first room
 func rob(nums []int) int {
 	n := len(nums)
 	if n < 1 {
 		return 0
+	} else if n == 1 {
+		return nums[0]
 	}
 	profit := max(robRooms(nums, 0, n-1),
 		robRooms(nums, 1, n))
-	profit = max(profit, robRooms(nums, 1, n-1))
+	//profit = max(profit, robRooms(nums, 1, n-1))
 	return profit
 }
 

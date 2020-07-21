@@ -29,6 +29,6 @@ func rob(nums []int) int {
 
 func main() {
 	nums := make([]int, 0)
-	nums = append(nums, 1, 2, 3, 4, 5, 6)
+	nums = append(nums, 5)
 	fmt.Println("max profit: ", rob(nums))
 }
