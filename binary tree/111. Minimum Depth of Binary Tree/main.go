@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-// TreeNode is definition for a binary tree node.
+// TreeNode is a definition for a binary tree node.
 type TreeNode struct {
 	Val   int
 	Left  *TreeNode
@@ -50,7 +50,5 @@ func main() {
 
 	fmt.Println("input: ", *root, *node1, *node2, *node3, *node4, *node5)
 
-	results := minDepth(root)
-
-	fmt.Println("Output: ", results)
+	fmt.Println("Output: ", minDepth(root))
 }

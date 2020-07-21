@@ -56,7 +56,5 @@ func main() {
 
 	fmt.Println("input: ", *root, *node1, *node2, *node3, *node4)
 
-	results := zigzagLevelOrder(root)
-
-	fmt.Println("output: ", results)
+	fmt.Println("output: ", zigzagLevelOrder(root))
 }
