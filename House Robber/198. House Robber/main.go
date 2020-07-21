@@ -20,7 +20,6 @@ func rob(nums []int) int {
 	}
 	dp0, dp1, dp2 := 0, 0, 0
 	for i := 0; i < len(nums); i++ {
-
 		dp0 = max(dp1, dp2+nums[i])
 		dp2 = dp1
 		dp1 = dp0
@@ -30,6 +29,6 @@ func rob(nums []int) int {
 
 func main() {
 	nums := make([]int, 0)
-	nums = append(nums, 2, 7, 9, 3, 1)
+	nums = append(nums, 1, 2, 3, 4, 5, 6)
 	fmt.Println("max profit: ", rob(nums))
 }
