@@ -31,7 +31,7 @@ func sortArray1(nums []int) []int {
 	//Constraints:
 	//1 <= nums.length <= 50000
 	//-50000 <= nums[i] <= 50000
-	bucket := [100001]int{}
+	bucket := make([]int, 100001)
 	for i := 0; i < len(nums); i++ {
 		bucket[nums[i]+50000]++
 	}
@@ -49,5 +49,5 @@ func sortArray1(nums []int) []int {
 func main() {
 	nums := []int{5, 7, 1, 1, 2, 0, 0, 8, 1, 4, 6, 3, 10, 2}
 	fmt.Println("input Array: ", nums)
-	fmt.Println("Sorted Array: ", sortArray1(nums))
+	fmt.Println("Sorted Array: ", sortArray(nums))
 }
