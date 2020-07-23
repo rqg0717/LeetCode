@@ -46,8 +46,64 @@ func sortArray1(nums []int) []int {
 	return nums
 }
 
+// bubble sort
+func sortArray2(nums []int) []int {
+	n := len(nums)
+	if n < 2 {
+		return nums
+	}
+	for i := 0; i < n; i++ {
+		for j := 0; j < (n - 1 - i); j++ {
+			if nums[j] > nums[j+1] {
+				temp := nums[j+1]
+				nums[j+1] = nums[j]
+				nums[j] = temp
+			}
+		}
+	}
+	return nums
+}
+
+// selection sort
+func sortArray3(nums []int) []int {
+	n := len(nums)
+	if n < 2 {
+		return nums
+	}
+	for i := 0; i < n-1; i++ {
+		index := i
+		for j := i + 1; j < n; j++ {
+			if nums[j] < nums[index] {
+				index = j
+			}
+		}
+		temp := nums[i]
+		nums[i] = nums[index]
+		nums[index] = temp
+	}
+	return nums
+}
+
+// insertion sort
+func sortArray4(nums []int) []int {
+	n := len(nums)
+	if n < 2 {
+		return nums
+	}
+	for i := 1; i < n; i++ {
+		previous := i - 1
+		current := nums[i]
+		for previous >= 0 && nums[previous] > current {
+			nums[previous+1] = nums[previous]
+			previous--
+		}
+		nums[previous+1] = current
+	}
+	return nums
+}
+
 func main() {
-	nums := []int{5, 7, 1, 1, 2, 0, 0, 8, 1, 4, 6, 3, 10, 2}
+	nums := []int{5, 7, 1, 1, 2, 0, 0, 8, 1, 4, 6, 3, 10, 2, 9}
 	fmt.Println("input Array: ", nums)
-	fmt.Println("Sorted Array: ", sortArray(nums))
+	fmt.Println("Sorted Array: ", sortArray4(nums))
 }
