@@ -3,6 +3,7 @@ package main
 import "fmt"
 
 // quick sort
+// O(nlogn) and O(nlogn)
 func sortArray(nums []int) []int {
 	if len(nums) < 2 {
 		return nums
@@ -47,6 +48,7 @@ func sortArray1(nums []int) []int {
 }
 
 // bubble sort
+// O(n^2) and O(1)
 func sortArray2(nums []int) []int {
 	n := len(nums)
 	if n < 2 {
@@ -65,6 +67,7 @@ func sortArray2(nums []int) []int {
 }
 
 // selection sort
+// O(n^2) and O(1)
 func sortArray3(nums []int) []int {
 	n := len(nums)
 	if n < 2 {
@@ -85,6 +88,7 @@ func sortArray3(nums []int) []int {
 }
 
 // insertion sort
+// O(n^2) and O(1)
 func sortArray4(nums []int) []int {
 	n := len(nums)
 	if n < 2 {
@@ -102,8 +106,36 @@ func sortArray4(nums []int) []int {
 	return nums
 }
 
+// Counting Sort
+// O(n^2+k) and O(n+k)
+func sortArray5(nums []int) []int {
+	n := len(nums)
+	if n < 2 {
+		return nums
+	}
+	max := nums[0]
+	for _, v := range nums {
+		if v > max {
+			max = v
+		}
+	}
+	index := 0
+	pool := make([]int, max+1)
+	for i := 0; i < n; i++ {
+		pool[nums[i]]++
+	}
+	for i := 0; i < max+1; i++ {
+		for pool[i] > 0 {
+			nums[index] = i
+			index++
+			pool[i]--
+		}
+	}
+	return nums
+}
+
 func main() {
 	nums := []int{5, 7, 1, 1, 2, 0, 0, 8, 1, 4, 6, 3, 10, 2, 9}
 	fmt.Println("input Array: ", nums)
-	fmt.Println("Sorted Array: ", sortArray4(nums))
+	fmt.Println("Sorted Array: ", sortArray5(nums))
 }
