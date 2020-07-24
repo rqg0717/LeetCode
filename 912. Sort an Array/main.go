@@ -122,7 +122,7 @@ func sortArray5(nums []int) []int {
 	index := 0
 	pool := make([]int, max+1)
 	for i := 0; i < n; i++ {
-		pool[nums[i]]++
+		pool[nums[i]]++ // <- problem here cannot handle negetive numbers...
 	}
 	for i := 0; i < max+1; i++ {
 		for pool[i] > 0 {
