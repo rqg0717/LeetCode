@@ -134,8 +134,39 @@ func sortArray5(nums []int) []int {
 	return nums
 }
 
+// Merge Sort
+// O(nlogn) and O(n)
+func sortArray6(nums []int) []int {
+	merge(nums, 0, len(nums)-1)
+	return nums
+}
+func merge(nums []int, left, right int) {
+	if left < right {
+		mid := (left + right) >> 1
+		merge(nums, left, mid)
+		merge(nums, mid+1, right)
+		temp := []int{}
+		i, j := left, mid+1
+		for i <= mid && j <= right {
+			if nums[i] <= nums[j] {
+				temp = append(temp, nums[i])
+				i++
+			} else {
+				temp = append(temp, nums[j])
+				j++
+			}
+		}
+		if i <= mid {
+			temp = append(temp, nums[i:mid+1]...)
+		} else {
+			temp = append(temp, nums[j:right+1]...)
+		}
+		copy(nums[left:right+1], temp)
+	}
+}
+
 func main() {
-	nums := []int{5, 7, 1, 1, 2, 0, 0, 8, 1, 4, 6, 3, 10, 2, 9}
+	nums := []int{5, 7, 1, 1, 2, 0, 0, 8, -1, 4, 6, 3, 10, -2, 9}
 	fmt.Println("input Array: ", nums)
-	fmt.Println("Sorted Array: ", sortArray5(nums))
+	fmt.Println("Sorted Array: ", sortArray2(nums))
 }

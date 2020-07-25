@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"sort"
+)
 
 func sortArray(nums []int) []int {
 	if len(nums) < 2 {
@@ -28,28 +31,29 @@ func sortArray(nums []int) []int {
 // double pointers
 func threeSum(nums []int) [][]int {
 	n := len(nums)
-	sortedNums := sortArray(nums)
+	//sortedNums := sortArray(nums)
+	sort.Ints(nums)
 	results := [][]int{}
 	for i := 0; i < n; i++ {
-		target := 0 - sortedNums[i]
+		target := 0 - nums[i]
 		left := i + 1
 		right := n - 1
-		if sortedNums[i] > 0 {
+		if nums[i] > 0 {
 			break
 		}
-		if i == 0 || sortedNums[i] != sortedNums[i-1] {
+		if i == 0 || nums[i] != nums[i-1] {
 			for left < right {
-				if sortedNums[left]+sortedNums[right] == target {
-					results = append(results, []int{sortedNums[i], sortedNums[left], sortedNums[right]})
-					for left < right && sortedNums[left] == sortedNums[left+1] {
+				if nums[left]+nums[right] == target {
+					results = append(results, []int{nums[i], nums[left], nums[right]})
+					for left < right && nums[left] == nums[left+1] {
 						left++
 					}
-					for left < right && sortedNums[right] == sortedNums[right-1] {
+					for left < right && nums[right] == nums[right-1] {
 						right--
 					}
 					left++
 					right--
-				} else if sortedNums[left]+sortedNums[right] < target {
+				} else if nums[left]+nums[right] < target {
 					left++
 				} else {
 					right--
