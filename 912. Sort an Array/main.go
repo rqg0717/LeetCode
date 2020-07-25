@@ -57,9 +57,7 @@ func sortArray2(nums []int) []int {
 	for i := 0; i < n; i++ {
 		for j := 0; j < (n - 1 - i); j++ {
 			if nums[j] > nums[j+1] {
-				temp := nums[j+1]
-				nums[j+1] = nums[j]
-				nums[j] = temp
+				nums[j], nums[j+1] = nums[j+1], nums[j]
 			}
 		}
 	}
@@ -108,6 +106,7 @@ func sortArray4(nums []int) []int {
 
 // Counting Sort
 // O(n^2+k) and O(n+k)
+// cannot handle negetive numbers in nums[]
 func sortArray5(nums []int) []int {
 	n := len(nums)
 	if n < 2 {
@@ -164,9 +163,11 @@ func merge(nums []int, left, right int) {
 // O(nlogn) and O(1)
 func sortArray7(nums []int) []int {
 	n := len(nums) - 1
+	// build heap
 	for i := n / 2; i >= 0; i-- {
 		heapify(nums, i, n)
 	}
+	// sort heap
 	for i := n; i >= 1; i-- {
 		// swap
 		nums[0], nums[i] = nums[i], nums[0]
@@ -178,10 +179,10 @@ func sortArray7(nums []int) []int {
 func heapify(nums []int, i, n int) {
 	largest := i
 	if i<<1+1 <= n && nums[i<<1+1] > nums[largest] {
-		largest = i<<1 + 1
+		largest = i<<1 + 1 // left
 	}
 	if i<<1+2 <= n && nums[i<<1+2] > nums[largest] {
-		largest = i<<1 + 2
+		largest = i<<1 + 2 // right
 	}
 	if largest != i {
 		nums[largest], nums[i] = nums[i], nums[largest]

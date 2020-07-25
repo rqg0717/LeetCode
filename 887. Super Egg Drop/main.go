@@ -21,7 +21,13 @@ func superEggDrop(K int, N int) int {
 	return N
 }
 
+// set the minimum number of moves as m
+// broken: 1; not broken: 0
+func superEggDrop1(K int, N int) int {
+	return 0
+}
+
 func main() {
-	K, N := 100, 10000
-	fmt.Println("the minimum number of moves: ", superEggDrop(K, N))
+	K, N := 1, 2
+	fmt.Println("the minimum number of moves: ", superEggDrop1(K, N))
 }
