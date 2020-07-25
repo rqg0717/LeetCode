@@ -1,5 +1,5 @@
 # LeetCode
-![](https://img.shields.io/badge/status-in_development-yellow.svg)
+![](https://img.shields.io/badge/status-in_development-green.svg)
 
 LeetCode Questions and my solutions in Golang
 
