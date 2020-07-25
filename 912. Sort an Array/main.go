@@ -147,26 +147,50 @@ func merge(nums []int, left, right int) {
 		merge(nums, mid+1, right)
 		temp := []int{}
 		i, j := left, mid+1
-		for i <= mid && j <= right {
-			if nums[i] <= nums[j] {
-				temp = append(temp, nums[i])
-				i++
-			} else {
+		for i <= mid || j <= right {
+			if i > mid || (j <= right && nums[j] < nums[i]) {
 				temp = append(temp, nums[j])
 				j++
+			} else {
+				temp = append(temp, nums[i])
+				i++
 			}
 		}
-		if i <= mid {
-			temp = append(temp, nums[i:mid+1]...)
-		} else {
-			temp = append(temp, nums[j:right+1]...)
-		}
 		copy(nums[left:right+1], temp)
+	}
+}
+
+// heap sort
+// O(nlogn) and O(1)
+func sortArray7(nums []int) []int {
+	n := len(nums) - 1
+	for i := n / 2; i >= 0; i-- {
+		heapify(nums, i, n)
+	}
+	for i := n; i >= 1; i-- {
+		// swap
+		nums[0], nums[i] = nums[i], nums[0]
+		n--
+		heapify(nums, 0, n)
+	}
+	return nums
+}
+func heapify(nums []int, i, n int) {
+	largest := i
+	if i<<1+1 <= n && nums[i<<1+1] > nums[largest] {
+		largest = i<<1 + 1
+	}
+	if i<<1+2 <= n && nums[i<<1+2] > nums[largest] {
+		largest = i<<1 + 2
+	}
+	if largest != i {
+		nums[largest], nums[i] = nums[i], nums[largest]
+		heapify(nums, largest, n)
 	}
 }
 
 func main() {
 	nums := []int{5, 7, 1, 1, 2, 0, 0, 8, -1, 4, 6, 3, 10, -2, 9}
 	fmt.Println("input Array: ", nums)
-	fmt.Println("Sorted Array: ", sortArray2(nums))
+	fmt.Println("Sorted Array: ", sortArray7(nums))
 }
