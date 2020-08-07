@@ -23,7 +23,26 @@ func subsets(nums []int) [][]int {
 	return dp[len(nums)]
 }
 
+// backtracking algorithm
+func backtracking(i int, nums, subset1 []int, results *[][]int) {
+	subset2 := make([]int, len(subset1))
+	copy(subset2, subset1)
+	*results = append(*results, subset2)
+	for j := i; j < len(nums); j++ {
+		subset1 = append(subset1, nums[j])
+		backtracking(j+1, nums, subset1, results)
+		subset1 = subset1[:len(subset1)-1]
+	}
+}
+
+func subsets1(nums []int) [][]int {
+	var results [][]int
+	subset := []int{}
+	backtracking(0, nums, subset, &results)
+	return results
+}
+
 func main() {
 	nums := []int{1, 2, 3}
-	fmt.Println("Output: ", subsets(nums))
+	fmt.Println("Output: ", subsets1(nums))
 }
