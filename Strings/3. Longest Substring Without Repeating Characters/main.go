@@ -30,7 +30,26 @@ func lengthOfLongestSubstring(s string) int {
 	return count
 }
 
+func max(x, y int) int {
+	if x > y {
+		return x
+	}
+	return y
+}
+
+func lengthOfLongestSubstring1(s string) int {
+	n := len(s)
+	count := 0
+	var ASCII [256]int // total number of chars in ASCII table is 256
+	for i, j := 0, 0; i < n; i++ {
+		j = max(ASCII[s[i]], j)
+		count = max(count, i-j+1)
+		ASCII[s[i]] = i + 1
+	}
+	return count
+}
+
 func main() {
-	s := "abcabcbb"
-	fmt.Println("Output: ", lengthOfLongestSubstring(s))
+	s := "a"
+	fmt.Println("Output: ", lengthOfLongestSubstring1(s))
 }
