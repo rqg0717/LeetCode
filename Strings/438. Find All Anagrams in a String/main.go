@@ -42,11 +42,11 @@ func findAnagrams1(s string, p string) []int {
 	}
 	left, right := 0, 0
 	valid := 0
-	for right < len(s) {
+	for right < sn {
 		c1 := s[right]
-		right++
+		right++ // moves the window to the right
 		if _, ok := pmap[c1]; ok {
-			window[c1]++
+			window[c1]++ // moves the char into the window
 			if window[c1] == pmap[c1] {
 				valid++
 			}
@@ -56,12 +56,12 @@ func findAnagrams1(s string, p string) []int {
 				indexs = append(indexs, left)
 			}
 			c2 := s[left]
-			left++
+			left++ // moves the window to the left
 			if _, ok := window[c2]; ok {
 				if window[c2] == pmap[c2] {
 					valid--
 				}
-				window[c2]--
+				window[c2]-- // moves the char out of the window
 			}
 		}
 	}
