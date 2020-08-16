@@ -41,28 +41,28 @@ func findAnagrams1(s string, p string) []int {
 		pmap[p[i]]++
 	}
 	left, right := 0, 0
-	valid := 0
+	match := 0
 	for right < sn {
 		c1 := s[right]
-		right++ // moves the window to the right
 		if _, ok := pmap[c1]; ok {
 			window[c1]++ // moves the char into the window
 			if window[c1] == pmap[c1] {
-				valid++
+				match++
 			}
 		}
+		right++ // moves the window to the right
 		for right-left >= pn {
-			if valid == len(pmap) {
+			if match == len(pmap) {
 				indexs = append(indexs, left)
 			}
 			c2 := s[left]
-			left++ // moves the window to the left
 			if _, ok := window[c2]; ok {
 				if window[c2] == pmap[c2] {
-					valid--
+					match--
 				}
 				window[c2]-- // moves the char out of the window
 			}
+			left++ // moves the window to the left
 		}
 	}
 	return indexs
