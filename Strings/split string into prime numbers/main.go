@@ -38,14 +38,13 @@ func countPrimes(s string) int {
 			}
 			if index > 1 {
 				if isPrime[index] {
-					count++
+					count = count + dp[j]
 				}
 			}
 		}
 		dp[i] = count
 		index, _ := strconv.Atoi(s[:i])
 		if index > n {
-			dp[i] = max(dp[i-1], dp[i])
 			continue
 		}
 		if index > 1 {
@@ -53,7 +52,6 @@ func countPrimes(s string) int {
 				dp[i]++
 			}
 		}
-		dp[i] = max(dp[i-1], dp[i])
 	}
 	return dp[l-1]
 }
