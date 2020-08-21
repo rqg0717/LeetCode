@@ -23,7 +23,23 @@ func plusOne(digits []int) []int {
 	return digits
 }
 
+func plusOne1(digits []int) []int {
+	for i := len(digits) - 1; i >= 0; i-- {
+		if digits[i] == 9 {
+			digits[i] = 0
+			if i == 0 {
+				digits = append([]int{1}, digits...)
+			}
+			continue
+		} else {
+			digits[i]++
+			break
+		}
+	}
+	return digits
+}
+
 func main() {
-	digits := []int{1, 3, 4}
-	fmt.Println("Output: ", plusOne(digits))
+	digits := []int{9, 9}
+	fmt.Println("Output: ", plusOne1(digits))
 }
