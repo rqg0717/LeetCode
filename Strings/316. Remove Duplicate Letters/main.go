@@ -56,5 +56,5 @@ func removeDuplicateLetters1(s string) string {
 
 func main() {
 	s := "cbacdcbc"
-	fmt.Println("Output: ", removeDuplicateLetters(s))
+	fmt.Println("Output: ", removeDuplicateLetters1(s))
 }
