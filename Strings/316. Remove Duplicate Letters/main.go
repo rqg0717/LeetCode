@@ -32,7 +32,29 @@ func removeDuplicateLetters(s string) string {
 	return string(r)
 }
 
+func removeDuplicateLetters1(s string) string {
+	n := len(s)
+	m1 := make(map[byte]int)
+	for i := 0; i < n; i++ {
+		m1[s[i]] = i
+	}
+	m2 := make(map[byte]bool)
+	result := ""
+	for i := 0; i < n; i++ {
+		if m2[s[i]] {
+			continue
+		}
+		for len(result) != 0 && result[len(result)-1] > s[i] && m1[result[len(result)-1]] > i {
+			m2[result[len(result)-1]] = false
+			result = result[:len(result)-1]
+		}
+		m2[s[i]] = true
+		result += string(s[i])
+	}
+	return result
+}
+
 func main() {
-	s := "bcabc"
+	s := "cbacdcbc"
 	fmt.Println("Output: ", removeDuplicateLetters(s))
 }
