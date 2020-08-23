@@ -4,8 +4,19 @@ import (
 	"fmt"
 )
 
-// similar to 142
 func findDuplicate(nums []int) int {
+	m := make(map[int]int)
+	for i, v := range nums {
+		if _, ok := m[v]; ok {
+			return v
+		}
+		m[v] = i
+	}
+	return -1
+}
+
+// similar to 142
+func findDuplicate1(nums []int) int {
 	slow, fast := 0, 0
 	for {
 		// slow moves one step while fast moves two steps at a time
