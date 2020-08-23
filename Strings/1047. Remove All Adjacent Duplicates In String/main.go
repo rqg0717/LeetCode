@@ -21,7 +21,22 @@ func removeDuplicates(S string) string {
 	return string(letters)
 }
 
+func removeDuplicates1(S string) string {
+	r := []rune(S)
+	for i := 0; i < len(r)-1; {
+		if r[i] == r[i+1] {
+			r = append(r[:i], r[i+2:]...)
+			if i > 0 {
+				i--
+			}
+		} else {
+			i++
+		}
+	}
+	return string(r)
+}
+
 func main() {
-	s := "abbaca"
-	fmt.Println("Output: ", removeDuplicates(s))
+	s := "cabbaca"
+	fmt.Println("Output: ", removeDuplicates1(s))
 }

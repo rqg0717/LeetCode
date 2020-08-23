@@ -22,7 +22,7 @@ func (s sortRunes) Len() int {
 func removeDuplicateLetters(s string) string {
 	r := []rune(s)
 	sort.Sort(sortRunes(r))
-	for i := 0; i+1 < len(r); {
+	for i := 0; i < len(r)-1; {
 		if r[i] == r[i+1] {
 			r = append(r[:i], r[i+1:]...)
 		} else {
@@ -56,5 +56,5 @@ func removeDuplicateLetters1(s string) string {
 
 func main() {
 	s := "cbacdcbc"
-	fmt.Println("Output: ", removeDuplicateLetters1(s))
+	fmt.Println("Output: ", removeDuplicateLetters(s))
 }
