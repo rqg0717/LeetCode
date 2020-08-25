@@ -35,7 +35,30 @@ func trap(height []int) int {
 	return result
 }
 
+func trap1(height []int) int {
+	right := len(height) - 1
+	left, leftMax, rightMax, result := 0, 0, 0, 0
+	for left < right {
+		if height[left] < height[right] {
+			if height[left] >= leftMax {
+				leftMax = height[left]
+			} else {
+				result += leftMax - height[left]
+			}
+			left++
+		} else {
+			if height[right] > rightMax {
+				rightMax = height[right]
+			} else {
+				result += rightMax - height[right]
+			}
+			right--
+		}
+	}
+	return result
+}
+
 func main() {
 	height := []int{0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1}
-	fmt.Println("Output: ", trap(height))
+	fmt.Println("Output: ", trap1(height))
 }
