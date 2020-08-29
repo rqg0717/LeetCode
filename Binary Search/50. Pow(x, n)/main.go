@@ -15,6 +15,8 @@ func mul(x float64, n int) float64 {
 	return y * y * x
 }
 
+// Taylor polynomial
+// 1 + x + x^2/2! + x^3/3! + ... x^n/n!
 func mul1(x float64, n int) float64 {
 	result := 1.0
 	supply := x
