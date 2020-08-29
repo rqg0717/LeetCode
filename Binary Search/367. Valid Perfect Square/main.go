@@ -21,7 +21,19 @@ func isPerfectSquare(num int) bool {
 	return false
 }
 
+// Newton–Raphson method
+func isPerfectSquare1(num int) bool {
+	if num < 2 {
+		return true
+	}
+	guess := num >> 1
+	for guess*guess > num {
+		guess = (guess + num/guess) >> 1
+	}
+	return (guess*guess == num)
+}
+
 func main() {
 	x := 16
-	fmt.Println("Output: ", isPerfectSquare(x))
+	fmt.Println("Output: ", isPerfectSquare1(x))
 }
