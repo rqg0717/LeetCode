@@ -15,15 +15,28 @@ func mul(x float64, n int) float64 {
 	return y * y * x
 }
 
+func mul1(x float64, n int) float64 {
+	result := 1.0
+	supply := x
+	for n > 0 {
+		if n%2 != 0 {
+			result *= supply
+		}
+		supply *= supply
+		n = n >> 1
+	}
+	return result
+}
+
 func myPow(x float64, n int) float64 {
 	if n >= 0 {
-		return mul(x, n)
+		return mul1(x, n)
 	}
-	return 1.0 / mul(x, -n)
+	return 1.0 / mul1(x, -n)
 }
 
 func main() {
 	x := 2.00000
-	n := 10
+	n := -10
 	fmt.Println("Output: ", myPow(x, n))
 }
