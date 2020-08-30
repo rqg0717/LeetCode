@@ -27,9 +27,23 @@ func twoSum1(nums []int, target int) []int {
 	return nil
 }
 
+func twoSum2(nums []int, target int) []int {
+	left, right := 0, len(nums)-1
+	for left < right {
+		sum := nums[left] + nums[right]
+		if sum == target {
+			return []int{left, right}
+		} else if sum < target {
+			left++
+		} else {
+			right--
+		}
+	}
+	return []int{-1, -1}
+}
+
 func main() {
 	nums := []int{2, 3, 7, 11}
 	target := 9
-	results := twoSum(nums, target)
-	fmt.Println(results[0], results[1])
+	fmt.Println("Output: ", twoSum2(nums, target))
 }
