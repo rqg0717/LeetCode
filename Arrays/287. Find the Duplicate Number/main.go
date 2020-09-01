@@ -38,7 +38,29 @@ func findDuplicate1(nums []int) int {
 	return fast
 }
 
+func findDuplicate2(nums []int) int {
+	n := len(nums)
+	left, right := 0, n-1
+	result := 0
+	for left <= right {
+		mid := (left + right) >> 1
+		counter := 0
+		for i := 0; i < n; i++ {
+			if nums[i] <= mid {
+				counter++
+			}
+		}
+		if counter <= mid {
+			left = mid + 1
+		} else {
+			right = mid - 1
+			result = mid
+		}
+	}
+	return result
+}
+
 func main() {
-	nums := []int{5, 1, 3, 4, 2, 3}
-	fmt.Println("Output: ", findDuplicate(nums))
+	nums := []int{1, 3, 4, 2, 2}
+	fmt.Println("Output: ", findDuplicate2(nums))
 }
