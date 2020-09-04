@@ -50,4 +50,8 @@ func main() {
 	fmt.Println("Erase 0: ", skiplist.Erase(0))   // return false, 0 is not in skiplist.
 	fmt.Println("Erase 1: ", skiplist.Erase(1))   // return true.
 	fmt.Println("Search 1: ", skiplist.Search(1)) // return false, 1 has already been erased.
+	skiplist.Add(20000)
+	skiplist.Add(20000)
+	fmt.Println("Erase 20000: ", skiplist.Erase(20000))   // return true.
+	fmt.Println("Search 20000: ", skiplist.Search(20000)) // return true, duplicate.
 }

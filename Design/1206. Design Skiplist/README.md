@@ -15,12 +15,8 @@ See more about Skiplist : https://en.wikipedia.org/wiki/Skip_list
 
 Note that duplicates may exist in the Skiplist, your code needs to handle this situation.
 
- 
-
 Example:
-
 Skiplist skiplist = new Skiplist();
-
 skiplist.add(1);
 skiplist.add(2);
 skiplist.add(3);
@@ -33,6 +29,5 @@ skiplist.search(1);   // return false, 1 has already been erased.
  
 
 Constraints:
-
 0 <= num, target <= 20000
 At most 50000 calls will be made to search, add, and erase.
