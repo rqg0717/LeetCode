@@ -2,36 +2,36 @@ package main
 
 import "fmt"
 
-// LinkNode is a doubly linked list
-type LinkNode struct {
+// LinkedNode is a doubly linked list
+type LinkedNode struct {
 	key, value     int
-	previous, next *LinkNode
+	previous, next *LinkedNode
 }
 
 // LRUCache is a Least Recently Used (LRU) cache
 type LRUCache struct {
-	nodes      map[int]*LinkNode
+	nodes      map[int]*LinkedNode
 	capacity   int
-	head, tail *LinkNode
+	head, tail *LinkedNode
 }
 
 // Constructor constructs LRUCache
 func Constructor(capacity int) LRUCache {
-	head := &LinkNode{0, 0, nil, nil}
-	tail := &LinkNode{0, 0, nil, nil}
+	head := &LinkedNode{0, 0, nil, nil}
+	tail := &LinkedNode{0, 0, nil, nil}
 	head.next = tail
 	tail.previous = head
-	return LRUCache{make(map[int]*LinkNode), capacity, head, tail}
+	return LRUCache{make(map[int]*LinkedNode), capacity, head, tail}
 }
 
 // RemoveNode removes a node from the doubly linked list
-func (lru *LRUCache) RemoveNode(node *LinkNode) {
+func (lru *LRUCache) RemoveNode(node *LinkedNode) {
 	node.previous.next = node.next
 	node.next.previous = node.previous
 }
 
 // AddNode inserts a node into the doubly linked list
-func (lru *LRUCache) AddNode(node *LinkNode) {
+func (lru *LRUCache) AddNode(node *LinkedNode) {
 	head := lru.head
 	node.next = head.next
 	head.next.previous = node
@@ -40,7 +40,7 @@ func (lru *LRUCache) AddNode(node *LinkNode) {
 }
 
 // MoveToHead moves a node to head
-func (lru *LRUCache) MoveToHead(node *LinkNode) {
+func (lru *LRUCache) MoveToHead(node *LinkedNode) {
 	lru.RemoveNode(node)
 	lru.AddNode(node)
 }
@@ -65,7 +65,7 @@ func (lru *LRUCache) Put(key int, value int) {
 		node.value = value
 		lru.MoveToHead(node)
 	} else {
-		node := &LinkNode{key, value, nil, nil}
+		node := &LinkedNode{key, value, nil, nil}
 		if len(nodes) == lru.capacity { // it's full, evicts previous node
 			delete(nodes, tail.previous.key) // built-in function deletes the element with the specified key (m[key]) from the map
 			tail.previous.previous.next = tail
