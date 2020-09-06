@@ -60,7 +60,29 @@ func minimumTotal1(triangle [][]int) int {
 	return dp
 }
 
+func minimumTotal2(triangle [][]int) int {
+	n := len(triangle)
+	if n == 1 {
+		return triangle[0][0]
+	}
+	dp := make([][]int, n)
+	for i := 0; i < n; i++ {
+		for j := 0; j < len(triangle[i]); j++ {
+			if dp[i] == nil {
+				dp[i] = make([]int, len(triangle[i]))
+			}
+			dp[i][j] = triangle[i][j]
+		}
+	}
+	for i := n - 2; i >= 0; i-- {
+		for j := 0; j < len(triangle[i]); j++ {
+			dp[i][j] = min(dp[i+1][j], dp[i+1][j+1]) + triangle[i][j]
+		}
+	}
+	return dp[0][0]
+}
+
 func main() {
 	triangle := [][]int{{2}, {3, 4}, {6, 5, 7}, {4, 1, 8, 3}}
-	fmt.Println("Output: ", minimumTotal1(triangle))
+	fmt.Println("Output: ", minimumTotal2(triangle))
 }
