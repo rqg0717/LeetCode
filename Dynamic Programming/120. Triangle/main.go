@@ -4,6 +4,13 @@ import (
 	"fmt"
 )
 
+func min(x, y int) int {
+	if x < y {
+		return x
+	}
+	return y
+}
+
 func dfs(i, j, min, sum int, triangle [][]int) int {
 	if i == len(triangle) {
 		if min > sum {
@@ -27,7 +34,33 @@ func minimumTotal(triangle [][]int) int {
 	return dfs(i, j, min, sum, triangle)
 }
 
+// dp
+func minimumTotal1(triangle [][]int) int {
+	n := len(triangle)
+	if n == 1 {
+		return triangle[0][0]
+	}
+	dp := 0
+	for i := 1; i < n; i++ {
+		for j := 0; j < i; j++ {
+			dp = triangle[i-1][j] + triangle[i][j]
+			if j-1 >= 0 {
+				dp = min(dp, triangle[i-1][j-1]+triangle[i][j])
+			}
+			triangle[i][j] = dp
+		}
+		triangle[i][i] += triangle[i-1][i-1]
+	}
+	dp = triangle[n-1][0]
+	for _, val := range triangle[n-1] {
+		if val < dp {
+			dp = val
+		}
+	}
+	return dp
+}
+
 func main() {
 	triangle := [][]int{{2}, {3, 4}, {6, 5, 7}, {4, 1, 8, 3}}
-	fmt.Println("Output: ", minimumTotal(triangle))
+	fmt.Println("Output: ", minimumTotal1(triangle))
 }
