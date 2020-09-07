@@ -28,7 +28,40 @@ func lengthOfLIS(nums []int) int {
 	return ret
 }
 
+// MinUint is the minimum unsigned integer
+const MinUint = 0
+
+// MaxUint is the maximum unsigned integer
+const MaxUint = ^uint(MinUint)
+
+// MaxInt is the maximum signed integer
+const MaxInt = int(MaxUint >> 1)
+
+// MinInt is the minimum signed integer
+const MinInt = -MaxInt - 1
+
+func lengthOfLIS1(nums []int) int {
+	dp := []int{MinInt}
+	for _, val := range nums {
+		if val > dp[len(dp)-1] {
+			dp = append(dp, val)
+		} else {
+			left, right := 0, len(dp)
+			for left < right {
+				mid := left + (right-left)>>1
+				if dp[mid] < val {
+					left = mid + 1
+				} else {
+					right = mid
+				}
+			}
+			dp[left] = val
+		}
+	}
+	return len(dp) - 1
+}
+
 func main() {
 	nums := []int{10, 9, 2, 5, 3, 7, 101, 18}
-	fmt.Println("Output: ", lengthOfLIS(nums))
+	fmt.Println("Output: ", lengthOfLIS1(nums))
 }
