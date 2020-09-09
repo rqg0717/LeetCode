@@ -9,6 +9,7 @@ func max(x, y int) int {
 	return y
 }
 
+// dp[i] = nums[i] + max(dp[i - 1], 0)
 func maxSubArray(nums []int) int {
 	n := len(nums)
 	if n < 1 {
@@ -19,7 +20,7 @@ func maxSubArray(nums []int) int {
 		return ret
 	}
 	for i := 1; i < n; i++ {
-		nums[i] = max(nums[i], nums[i]+nums[i-1])
+		nums[i] = nums[i] + max(nums[i-1], 0)
 		ret = max(ret, nums[i])
 	}
 	return ret
