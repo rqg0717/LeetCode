@@ -43,11 +43,11 @@ func game(board [][]byte, x, y int) {
 }
 
 func main() {
-	board := [][]byte{{'E', 'E', 'E', 'E', 'E'},
-		{'E', 'E', 'M', 'E', 'E'},
+	board := [][]byte{{'E', 'M', 'E', 'E', 'E'},
 		{'E', 'E', 'E', 'E', 'E'},
+		{'E', 'M', 'M', 'E', 'M'},
 		{'E', 'E', 'E', 'E', 'E'}}
-	click := []int{3, 0}
+	click := []int{1, 2}
 	board = updateBoard(board, click)
 	fmt.Println("Output: ")
 	for _, array := range board {
