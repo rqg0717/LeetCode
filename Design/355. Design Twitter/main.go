@@ -14,14 +14,14 @@ type User struct {
 // Twitter ...
 type Twitter struct {
 	time      int
-	followers map[int]map[int]int //user ID, follower ID
-	tweets    map[int]map[int]int //user ID, tweet ID, tweet time
+	followers map[int]map[int]bool //user ID, follower ID, hasFollower?
+	tweets    map[int]map[int]int  //user ID, tweet ID, tweet time
 }
 
 // Constructor ...
 func Constructor() Twitter {
 	time := 0
-	followers := make(map[int]map[int]int)
+	followers := make(map[int]map[int]bool)
 	tweets := make(map[int]map[int]int)
 	return Twitter{
 		time:      time,
@@ -47,10 +47,10 @@ func (twitter *Twitter) Follow(userID int, followeeID int) {
 	}
 	follower, ok := twitter.followers[userID]
 	if !ok {
-		follower = make(map[int]int)
+		follower = make(map[int]bool)
 		twitter.followers[userID] = follower
 	}
-	follower[followeeID] = 1
+	follower[followeeID] = true
 }
 
 // Unfollow unfollows a user.
@@ -69,7 +69,7 @@ func (twitter *Twitter) GetNewsFeed(userID int) []int {
 		}
 	}
 
-	users := make([]*User, 0)
+	users := []*User{}
 	for _, id := range ids {
 		if tweet, ok := twitter.tweets[id]; ok {
 			for uID, uTime := range tweet {

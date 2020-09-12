@@ -91,8 +91,8 @@ func Constructor1() UndergroundSystem1 {
 
 // CheckIn1 A customer with id card equal to id, gets in the station stationName at time t.
 func (us *UndergroundSystem1) CheckIn1(id int, stationName string, t int) {
-	s := &Station{stationName, t}
-	us.in[id] = s
+	station := &Station{stationName, t}
+	us.in[id] = station
 }
 
 // CheckOut1 A customer with id card equal to id, gets out from the station stationName at time t.
