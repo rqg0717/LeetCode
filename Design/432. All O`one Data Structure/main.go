@@ -15,31 +15,51 @@ type DoublyLinkedList struct {
 	length int
 }
 
+// AllOne ...
 type AllOne struct {
+	dmap map[string]*DoublyLinkedNode
+	list DoublyLinkedList
 }
 
-/** Initialize your data structure here. */
+// Constructor Initializes data structure here.
 func Constructor() AllOne {
+	head := &DoublyLinkedNode{
+		key:   "",
+		value: 0,
+	}
+	tail := &DoublyLinkedNode{
+		key:   "",
+		value: 0,
+	}
+	head.next = tail
+	tail.previous = head
+	return AllOne{
+		dmap: make(map[string]*DoublyLinkedNode),
+		list: DoublyLinkedList{
+			head:   head,
+			tail:   tail,
+			length: 0,
+		},
+	}
+}
+
+// Inc Inserts a new key <Key> with value 1. Or increments an existing key by 1.
+func (ao *AllOne) Inc(key string) {
 
 }
 
-/** Inserts a new key <Key> with value 1. Or increments an existing key by 1. */
-func (this *AllOne) Inc(key string) {
+// Dec Decrements an existing key by 1. If Key's value is 1, remove it from the data structure.
+func (ao *AllOne) Dec(key string) {
 
 }
 
-/** Decrements an existing key by 1. If Key's value is 1, remove it from the data structure. */
-func (this *AllOne) Dec(key string) {
+// GetMaxKey Returns one of the keys with maximal value.
+func (ao *AllOne) GetMaxKey() string {
 
 }
 
-/** Returns one of the keys with maximal value. */
-func (this *AllOne) GetMaxKey() string {
-
-}
-
-/** Returns one of the keys with Minimal value. */
-func (this *AllOne) GetMinKey() string {
+// GetMinKey Returns one of the keys with Minimal value.
+func (ao *AllOne) GetMinKey() string {
 
 }
 
