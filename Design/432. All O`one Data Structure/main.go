@@ -39,13 +39,49 @@ func Constructor() AllOne {
 			head:   head,
 			tail:   tail,
 			length: 0,
-		},
-	}
+		}}
+}
+
+func (ao *AllOne) removeNode(node *DoublyLinkedNode) {
+	node.previous.next = node.next
+	node.next.previous = node.previous
+}
+
+func (ao *AllOne) addNode(node, current *DoublyLinkedNode) {
+	node.next = current
+	node.previous = current.previous
+	current.previous.next = node
+	current.previous = node
 }
 
 // Inc Inserts a new key <Key> with value 1. Or increments an existing key by 1.
 func (ao *AllOne) Inc(key string) {
+	if node, ok := ao.dmap[key]; ok {
+		node.value++
+		current := node.next
+		for current != ao.list.tail {
+			if current.value >= node.value {
+				break
+			}
+			current = current.next
+		}
+		if node.next != current {
+			ao.removeNode(node)
+			ao.addNode(node, current)
+		}
+	} else {
+		node := &DoublyLinkedNode{
+			key:   key,
+			value: 1,
+		}
+		node.next = ao.list.head.next
+		node.previous = ao.list.head
+		ao.list.head.next.previous = node
+		ao.list.head.next = node
 
+		ao.dmap[key] = node
+		ao.list.length++
+	}
 }
 
 // Dec Decrements an existing key by 1. If Key's value is 1, remove it from the data structure.
