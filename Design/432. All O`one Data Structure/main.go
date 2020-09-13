@@ -86,7 +86,26 @@ func (ao *AllOne) Inc(key string) {
 
 // Dec Decrements an existing key by 1. If Key's value is 1, remove it from the data structure.
 func (ao *AllOne) Dec(key string) {
-
+	if node, ok := ao.dmap[key]; ok {
+		if node.value <= 1 {
+			ao.removeNode(node)
+			ao.list.length--
+			delete(ao.dmap, key)
+		} else {
+			node.value--
+			current := node.previous
+			for current != ao.list.tail {
+				if current.value <= node.value {
+					break
+				}
+				current = current.previous
+			}
+			if node.previous != current {
+				ao.removeNode(node)
+				ao.addNode(node, current)
+			}
+		}
+	}
 }
 
 // GetMaxKey Returns one of the keys with maximal value.
