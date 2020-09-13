@@ -2,16 +2,16 @@ package main
 
 import "fmt"
 
-// LinkedNode is a doubly linked list
-type LinkedNode struct {
+// DoublyLinkedNode is a doubly linked node
+type DoublyLinkedNode struct {
 	key, value, frequency int
-	previous, next        *LinkedNode
+	previous, next        *DoublyLinkedNode
 }
 
-// DoublyLinkedNode is a doubly linked list
-type DoublyLinkedNode struct {
+// DoublyLinkedList is a doubly linked list
+type DoublyLinkedList struct {
 	size       int
-	head, tail *LinkedNode
+	head, tail *DoublyLinkedNode
 }
 
 // LFUCache is a Least Frequently Used (LFU) cache
@@ -19,8 +19,8 @@ type LFUCache struct {
 	capacity    int
 	current     int // current the least used
 	size        int
-	cache       map[int]*LinkedNode
-	frequencies map[int]*DoublyLinkedNode
+	cache       map[int]*DoublyLinkedNode
+	frequencies map[int]*DoublyLinkedList
 }
 
 // Constructor creates LFUCache
@@ -29,25 +29,25 @@ func Constructor(capacity int) LFUCache {
 		capacity:    capacity,
 		current:     0,
 		size:        0,
-		cache:       make(map[int]*LinkedNode),
-		frequencies: make(map[int]*DoublyLinkedNode),
+		cache:       make(map[int]*DoublyLinkedNode),
+		frequencies: make(map[int]*DoublyLinkedList),
 	}
 }
 
-func (dln *DoublyLinkedNode) remove(node *LinkedNode) {
+func (dln *DoublyLinkedList) remove(node *DoublyLinkedNode) {
 	previous := node.previous
 	previous.next = node.next
 	previous.next.previous = previous
 }
 
 // RemoveNode removes a node from the doubly linked list
-func (lfu *LFUCache) RemoveNode(node *LinkedNode) {
+func (lfu *LFUCache) RemoveNode(node *DoublyLinkedNode) {
 	dln := lfu.frequencies[node.frequency]
 	dln.remove(node)
 	dln.size--
 }
 
-func (dln *DoublyLinkedNode) add(node *LinkedNode) {
+func (dln *DoublyLinkedList) add(node *DoublyLinkedNode) {
 	next := dln.head.next
 	next.previous = node
 	dln.head.next = node
@@ -56,12 +56,12 @@ func (dln *DoublyLinkedNode) add(node *LinkedNode) {
 }
 
 // AddNode inserts a node into the doubly linked list
-func (lfu *LFUCache) AddNode(node *LinkedNode) {
+func (lfu *LFUCache) AddNode(node *DoublyLinkedNode) {
 	if val, ok := lfu.frequencies[node.frequency]; ok {
 		val.add(node)
 		val.size++
 	} else {
-		dln := &DoublyLinkedNode{0, &LinkedNode{}, &LinkedNode{}}
+		dln := &DoublyLinkedList{0, &DoublyLinkedNode{}, &DoublyLinkedNode{}}
 		dln.head.next = dln.tail
 		dln.tail.previous = dln.head
 		dln.add(node)
@@ -84,7 +84,7 @@ func (lfu *LFUCache) Get(key int) int {
 	return -1
 }
 
-func (dln *DoublyLinkedNode) removeTail() *LinkedNode {
+func (dln *DoublyLinkedList) removeTail() *DoublyLinkedNode {
 	previous := dln.tail.previous
 	previous.previous.next = dln.tail
 	dln.tail.previous = previous.previous
@@ -103,7 +103,7 @@ func (lfu *LFUCache) Put(key int, value int) {
 	if lfu.capacity == 0 {
 		return
 	}
-	newnode := &LinkedNode{key, value, 1, nil, nil}
+	newnode := &DoublyLinkedNode{key, value, 1, nil, nil}
 	if node, ok := lfu.cache[key]; !ok {
 		if lfu.size < lfu.capacity {
 			lfu.AddNode(newnode)

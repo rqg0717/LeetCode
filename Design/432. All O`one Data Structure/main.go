@@ -80,7 +80,6 @@ func (ao *AllOne) Inc(key string) {
 		node.previous = ao.list.head
 		ao.list.head.next.previous = node
 		ao.list.head.next = node
-
 		ao.dmap[key] = node
 		ao.list.length++
 	}
@@ -89,7 +88,7 @@ func (ao *AllOne) Inc(key string) {
 // Dec Decrements an existing key by 1. If Key's value is 1, remove it from the data structure.
 func (ao *AllOne) Dec(key string) {
 	if node, ok := ao.dmap[key]; ok {
-		if node.value <= 1 {
+		if node.value < 2 {
 			ao.removeNode(node)
 			ao.list.length--
 			delete(ao.dmap, key)
