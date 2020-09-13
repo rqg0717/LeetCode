@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 // DoublyLinkedNode ...
 type DoublyLinkedNode struct {
 	previous *DoublyLinkedNode
@@ -110,12 +112,18 @@ func (ao *AllOne) Dec(key string) {
 
 // GetMaxKey Returns one of the keys with maximal value.
 func (ao *AllOne) GetMaxKey() string {
-
+	if ao.list.length == 0 {
+		return ""
+	}
+	return ao.list.tail.previous.key
 }
 
 // GetMinKey Returns one of the keys with Minimal value.
 func (ao *AllOne) GetMinKey() string {
-
+	if ao.list.length == 0 {
+		return ""
+	}
+	return ao.list.head.next.key
 }
 
 /**
@@ -126,3 +134,12 @@ func (ao *AllOne) GetMinKey() string {
  * param_3 := obj.GetMaxKey();
  * param_4 := obj.GetMinKey();
  */
+func main() {
+	ao := Constructor()
+	ao.Inc("1")
+	ao.Inc("2")
+	ao.Inc("3")
+	ao.Dec("1")
+	fmt.Println("Max Key: ", ao.GetMaxKey())
+	fmt.Println("Min Key: ", ao.GetMinKey())
+}
