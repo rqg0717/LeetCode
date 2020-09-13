@@ -101,10 +101,17 @@ func (ao *AllOne) Dec(key string) {
 				}
 				current = current.previous
 			}
-			if node.previous != current {
+			if current.previous == nil {
+				current = current.next
 				ao.removeNode(node)
 				ao.addNode(node, current)
+			} else {
+				if node.previous != current {
+					ao.removeNode(node)
+					ao.addNode(node, current)
+				}
 			}
+
 		}
 	}
 }
@@ -138,7 +145,11 @@ func main() {
 	ao.Inc("1")
 	ao.Inc("2")
 	ao.Inc("3")
+	ao.Inc("1")
+	ao.Inc("2")
+	ao.Inc("3")
 	ao.Dec("1")
+	ao.Dec("3")
 	fmt.Println("Max Key: ", ao.GetMaxKey())
 	fmt.Println("Min Key: ", ao.GetMinKey())
 }
