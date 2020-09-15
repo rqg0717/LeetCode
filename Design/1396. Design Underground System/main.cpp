@@ -47,6 +47,7 @@ public:
 int main()
 {
     UndergroundSystem *pUS = new UndergroundSystem();
+    
     pUS->checkIn(45, "Leyton", 3);
     pUS->checkIn(32, "Paradise", 8);
     pUS->checkIn(27, "Leyton", 10);
@@ -55,5 +56,8 @@ int main()
     pUS->checkOut(32, "Cambridge", 22);
     double param_3 = pUS->getAverageTime("Leyton", "Waterloo");
     cout << param_3 << endl;
+
+    delete pUS;
+    pUS = NULL;
     return 0;
 }
