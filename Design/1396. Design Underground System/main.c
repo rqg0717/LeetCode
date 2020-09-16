@@ -115,8 +115,6 @@ void undergroundSystemFree(UndergroundSystem* obj) {
  * undergroundSystemFree(obj);
 */
 int main() {
-    char out[128];
-
     UndergroundSystem* pUS =  undergroundSystemCreate();
     undergroundSystemCheckIn(pUS, 45, "Leyton", 3);
     undergroundSystemCheckIn(pUS, 32, "Paradise", 8);
@@ -126,7 +124,7 @@ int main() {
     undergroundSystemCheckOut(pUS, 32, "Cambridge", 22);
 
     double param_3 = undergroundSystemGetAverageTime(pUS, "Leyton", "Waterloo");
-    printf(out, "Output: %f.", param_3);
+    printf("Output: %f.", param_3);
 
     undergroundSystemFree(pUS);
     return 0;
