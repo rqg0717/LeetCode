@@ -18,7 +18,26 @@ func bulbSwitch(n int) int {
 	return result
 }
 
+func sqrt(x int) int {
+	left, right := 0, x
+	ans := -1
+	for left <= right {
+		mid := left + (right-left)>>1
+		if mid*mid <= x {
+			ans = mid
+			left = mid + 1
+		} else {
+			right = mid - 1
+		}
+	}
+	return ans
+}
+
+func bulbSwitch1(n int) int {
+	return sqrt(n)
+}
+
 func main() {
 	n := 16
-	fmt.Println("Output: ", bulbSwitch(n))
+	fmt.Println("Output: ", bulbSwitch1(n))
 }
