@@ -24,7 +24,7 @@ func mySqrt1(x int) int {
 	if x == 0 {
 		return 0
 	}
-	guess, x0 := float64(x/2), float64(x)
+	guess, x0 := float64(x), float64(x)
 	for {
 		// 2xix0-(x0^2+guess) = 0
 		// xi = 1/2(x0+guess/x0)
@@ -38,6 +38,6 @@ func mySqrt1(x int) int {
 }
 
 func main() {
-	x := 8
+	x := 9
 	fmt.Println("Output: ", mySqrt1(x))
 }
