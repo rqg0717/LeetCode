@@ -33,6 +33,7 @@ func sqrt(x int) int {
 	return ans
 }
 
+
 func bulbSwitch1(n int) int {
 	return sqrt(n)
 }
