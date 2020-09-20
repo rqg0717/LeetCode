@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"math"
+)
 
 func bulbSwitch(n int) int {
 	result := 0
@@ -33,9 +36,25 @@ func sqrt(x int) int {
 	return ans
 }
 
+func mySqrt(x int) int {
+	if x == 0 {
+		return 0
+	}
+	guess, x0 := float64(x), float64(x)
+	for {
+		// 2xix0-(x0^2+guess) = 0
+		// xi = 1/2(x0+guess/x0)
+		xi := 0.5 * (x0 + guess/x0)
+		if math.Abs(x0-xi) < 1e-7 {
+			break
+		}
+		x0 = xi
+	}
+	return int(x0)
+}
 
 func bulbSwitch1(n int) int {
-	return sqrt(n)
+	return mySqrt(n)
 }
 
 func main() {
