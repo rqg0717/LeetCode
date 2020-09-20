@@ -58,6 +58,6 @@ func bulbSwitch1(n int) int {
 }
 
 func main() {
-	n := 16
+	n := 3
 	fmt.Println("Output: ", bulbSwitch1(n))
 }
