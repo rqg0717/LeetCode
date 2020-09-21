@@ -52,5 +52,5 @@ func main() {
 
 	node1 = mergeTwoLists(l1, l2)
 
-	fmt.Println("Output: ", *node1, *node2, *node3, *node4, *node5, *node6)
+	fmt.Println("Output: ", *node1, *node1.Next, *node1.Next.Next, *node1.Next.Next.Next, *node1.Next.Next.Next.Next, *node1.Next.Next.Next.Next.Next)
 }
