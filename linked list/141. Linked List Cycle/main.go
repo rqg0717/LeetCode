@@ -20,6 +20,19 @@ func hasCycle(head *ListNode) bool {
 	return false
 }
 
+func hasCycle1(head *ListNode) bool {
+	m := make(map[*ListNode]int)
+	current := head
+	for current != nil {
+		if _, exist := m[current]; exist {
+			return true
+		}
+		m[current] = 1
+		current = current.Next
+	}
+	return false
+}
+
 func main() {
 	node1 := &ListNode{Val: 3}
 	node2 := &ListNode{Val: 2}
@@ -31,5 +44,5 @@ func main() {
 	node3.Next = node4
 	node4.Next = node2
 
-	fmt.Println("Output: ", hasCycle(node1))
+	fmt.Println("Output: ", hasCycle1(node1))
 }
