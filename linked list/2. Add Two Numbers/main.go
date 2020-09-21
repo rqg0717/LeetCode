@@ -9,6 +9,9 @@ type ListNode struct {
 }
 
 func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
+	if l1 == nil && l2 == nil {
+		return nil
+	}
 	sum := &ListNode{Val: 0}
 	result := sum
 	tmp := 0
