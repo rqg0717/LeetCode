@@ -34,9 +34,28 @@ func minPathSum(grid [][]int) int {
 	return dp[n-1][len(dp[n-1])-1]
 }
 
+func minPathSum1(grid [][]int) int {
+	n := len(grid)
+	if n < 1 {
+		return 0
+	}
+	for i := 0; i < n; i++ {
+		for j := 0; j < len(grid[i]); j++ {
+			if i == 0 && j != 0 {
+				grid[i][j] = grid[i][j-1] + grid[i][j]
+			} else if j == 0 && i != 0 {
+				grid[i][j] = grid[i-1][j] + grid[i][j]
+			} else if i != 0 && j != 0 {
+				grid[i][j] = min(grid[i-1][j], grid[i][j-1]) + grid[i][j]
+			}
+		}
+	}
+	return grid[n-1][len(grid[n-1])-1]
+}
+
 func main() {
 	grid := [][]int{{1, 3, 1},
 		{1, 5, 1},
 		{4, 2, 1}}
-	fmt.Println("Output: ", minPathSum(grid))
+	fmt.Println("Output: ", minPathSum1(grid))
 }
