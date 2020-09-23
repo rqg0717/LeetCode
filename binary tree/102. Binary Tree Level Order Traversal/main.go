@@ -40,6 +40,24 @@ func levelOrder(root *TreeNode) [][]int {
 	return results
 }
 
+func levelOrder1(root *TreeNode) [][]int {
+	return dfs(root, 0, [][]int{})
+}
+
+func dfs(root *TreeNode, level int, results [][]int) [][]int {
+	if root == nil {
+		return results
+	}
+	if len(results) == level {
+		results = append(results, []int{root.Val})
+	} else {
+		results[level] = append(results[level], root.Val)
+	}
+	results = dfs(root.Left, level+1, results)
+	results = dfs(root.Right, level+1, results)
+	return results
+}
+
 func main() {
 	// [3,9,20,null,null,15,7]
 	// [3,9,20,null,null,15,7]
@@ -62,5 +80,5 @@ func main() {
 
 	fmt.Println("Input: ", *root, *node1, *node2, *node3, *node4)
 
-	fmt.Println("output: ", levelOrder(&root))
+	fmt.Println("output: ", levelOrder1(root))
 }
