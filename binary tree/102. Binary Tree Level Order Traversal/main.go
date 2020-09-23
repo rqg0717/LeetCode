@@ -13,9 +13,7 @@ type TreeNode struct {
 
 func levelOrder(root *TreeNode) [][]int {
 	// Breadth-first search & O(n) & O(n)
-
 	results := [][]int{}
-
 	if root == nil {
 		return results
 	}
@@ -44,29 +42,25 @@ func levelOrder(root *TreeNode) [][]int {
 
 func main() {
 	// [3,9,20,null,null,15,7]
-	root := TreeNode{}
-	node1 := TreeNode{}
-	node2 := TreeNode{}
-	node3 := TreeNode{}
-	node4 := TreeNode{}
+	// [3,9,20,null,null,15,7]
+	root := &TreeNode{Val: 3}
+	node1 := &TreeNode{Val: 9}
+	node2 := &TreeNode{Val: 20}
+	node3 := &TreeNode{Val: 15}
+	node4 := &TreeNode{Val: 7}
 
-	root.Val = 3
-	root.Left = &node1
-	root.Right = &node2
-	root.Left.Val = 9
+	root.Left = node1
+	root.Right = node2
 	root.Left.Left = nil
 	root.Left.Right = nil
-	root.Right.Val = 20
-	root.Right.Left = &node3
-	root.Right.Right = &node4
-	root.Right.Left.Val = 15
+	root.Right.Left = node3
+	root.Right.Right = node4
 	root.Right.Left.Left = nil
 	root.Right.Left.Right = nil
-	root.Right.Right.Val = 7
 	root.Right.Right.Left = nil
 	root.Right.Right.Right = nil
 
-	fmt.Println("input: ", root, node1, node2, node3, node4)
+	fmt.Println("Input: ", *root, *node1, *node2, *node3, *node4)
 
 	fmt.Println("output: ", levelOrder(&root))
 }
