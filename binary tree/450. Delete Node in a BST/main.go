@@ -50,7 +50,6 @@ func deleteNode(root *TreeNode, key int) *TreeNode {
 }
 
 func main() {
-	// [4,2,5,1,3]
 	root := &TreeNode{Val: 7}
 	node1 := &TreeNode{Val: 3}
 	node2 := &TreeNode{Val: 9}
