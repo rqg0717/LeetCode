@@ -45,6 +45,22 @@ func isBalanced(root *TreeNode) bool {
 	return true
 }
 
+func maxHeight(root *TreeNode) int {
+	if root == nil {
+		return 0
+	}
+	left := maxHeight(root.Left)
+	right := maxHeight(root.Right)
+	if left == -1 || right == -1 || abs(left-right) > 1 {
+		return -1
+	}
+	return max(left, right) + 1
+}
+
+func isBalanced1(root *TreeNode) bool {
+	return maxHeight(root) >= 0
+}
+
 func main() {
 	root := &TreeNode{Val: 7}
 	node1 := &TreeNode{Val: 3}
@@ -61,5 +77,5 @@ func main() {
 	node4.Left = node5
 	node5.Right = node6
 
-	fmt.Println("isBalanced? ", isBalanced(root))
+	fmt.Println("isBalanced? ", isBalanced1(root))
 }
