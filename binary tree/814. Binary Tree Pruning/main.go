@@ -35,10 +35,11 @@ func main() {
 
 	root.Left = node1
 	root.Right = node2
-	root.Left.Left = node3
-	node3.Left = node4
-	node3.Right = node5
-	node5.Left = node6
+	node1.Left = node3
+	node1.Right = node4
+	node2.Left = node5
+	node2.Right = node6
 
-	fmt.Println("Output: ", pruneTree(root))
+	root = pruneTree(root)
+	fmt.Println("Output: ", *root)
 }
