@@ -6,9 +6,11 @@ import (
 
 func reverseBits(num uint32) uint32 {
 	result := uint32(0)
-	for i := 0; i < 32; i++ {
+	i := 0
+	for i < 32 {
 		result = (result << 1) + (num & 1)
 		num >>= 1
+		i++
 	}
 	return result
 }
@@ -23,6 +25,6 @@ func reverseBits1(num uint32) uint32 {
 }
 
 func main() {
-	num := uint32(0b11111111111111111111111111111101)
-	fmt.Println("Output: ", reverseBits1(num))
+	num := uint32(0b00000010100101000001111010011100)
+	fmt.Println("Output: ", reverseBits(num))
 }
