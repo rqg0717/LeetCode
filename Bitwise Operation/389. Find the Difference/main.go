@@ -13,8 +13,19 @@ func findTheDifference(s string, t string) byte {
 	return result
 }
 
+func findTheDifference1(s string, t string) byte {
+	result := 0
+	for _, ch := range t {
+		result += int(ch)
+	}
+	for _, ch := range s {
+		result -= int(ch)
+	}
+	return byte(result)
+}
+
 func main() {
 	s := "abcd"
 	t := "abcde"
-	fmt.Println("Output: ", string(findTheDifference(s, t)))
+	fmt.Println("Output: ", string(findTheDifference1(s, t)))
 }
