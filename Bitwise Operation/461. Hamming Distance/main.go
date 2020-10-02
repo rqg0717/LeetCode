@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"math/bits"
+)
 
 func hammingDistance(x int, y int) int {
 	x = x ^ y
@@ -12,8 +15,12 @@ func hammingDistance(x int, y int) int {
 	return count
 }
 
+func hammingDistance2(x int, y int) int {
+	return bits.OnesCount(uint(x) ^ uint(y))
+}
+
 func main() {
 	x := 2
 	y := 7
-	fmt.Println("Output: ", hammingDistance(x, y))
+	fmt.Println("Output: ", hammingDistance2(x, y))
 }
