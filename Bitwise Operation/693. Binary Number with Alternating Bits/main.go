@@ -14,7 +14,12 @@ func hasAlternatingBits(n int) bool {
 	return true
 }
 
+func hasAlternatingBits1(n int) bool {
+	n = n ^ (n >> 1)
+	return n&(n+1) == 0
+}
+
 func main() {
 	n := 5
-	fmt.Println("Output: ", hasAlternatingBits(n))
+	fmt.Println("Output: ", hasAlternatingBits1(n))
 }
