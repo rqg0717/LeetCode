@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"math/bits"
 )
 
 func countPrimeSetBits(L int, R int) int {
@@ -25,8 +26,17 @@ func countPrimeSetBits(L int, R int) int {
 	return sum
 }
 
+func countPrimeSetBits1(L int, R int) int {
+	mask := 0b10100010100010101100
+	sum := 0
+	for i := L; i <= R; i++ {
+		sum += mask >> bits.OnesCount(uint(i)) & 1
+	}
+	return sum
+}
+
 func main() {
 	L := 6
 	R := 10
-	fmt.Println("Output: ", countPrimeSetBits(L, R))
+	fmt.Println("Output: ", countPrimeSetBits1(L, R))
 }
