@@ -14,5 +14,5 @@ func missingNumber(nums []int) int {
 
 func main() {
 	nums := []int{9, 6, 4, 2, 3, 5, 7, 0, 1}
-	fmt.Println("Output: ", missingNumber(nums))
+	fmt.Println("Output: ", missingNumber1(nums))
 }
