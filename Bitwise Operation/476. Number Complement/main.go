@@ -5,12 +5,21 @@ import (
 )
 
 func findComplement(num int) int {
-	result := 1
-	for result <= num {
-		result <<= 1
+	mask := 1
+	for mask <= num {
+		mask <<= 1
 	}
-	result = (result - 1) ^ num
-	return result
+	mask = (mask - 1) ^ num
+	return mask
+}
+
+func findComplement1(num int) int {
+	mask := 1
+	for mask < num {
+		mask = (mask << 1) + 1
+	}
+	mask ^= num
+	return mask
 }
 
 func main() {
