@@ -14,8 +14,16 @@ func rangeBitwiseAnd(m int, n int) int {
 	return n << shift
 }
 
+// from 461.
+func rangeBitwiseAnd1(m int, n int) int {
+	for m < n {
+		n &= (n - 1)
+	}
+	return n
+}
+
 func main() {
 	m := 5
 	n := 7
-	fmt.Println("Output: ", rangeBitwiseAnd(m, n))
+	fmt.Println("Output: ", rangeBitwiseAnd1(m, n))
 }
