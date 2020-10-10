@@ -5,7 +5,13 @@ import (
 )
 
 func grayCode(n int) []int {
+	if n < 0 {
+		return nil
+	}
 	results := []int{0}
+	if n == 0 {
+		return results
+	}
 	count := 1
 	for i := 0; i < n; i++ {
 		for j := count - 1; j >= 0; j-- {
