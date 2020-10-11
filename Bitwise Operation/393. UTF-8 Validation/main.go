@@ -6,17 +6,17 @@ import (
 
 func validUtf8(data []int) bool {
 	bit := 0
-	for num := range data {
+	for i := 0; i < len(data); i++ {
 		mask1, mask2 := 1<<7, 1<<6
 		if bit != 0 {
-			if !((num&mask1) != 0 && (num&mask2) != 0) {
+			if !((data[i]&mask1 != 0) && (data[i]&mask2) == 0) {
 
 				return false
 			}
 			bit--
 			continue
 		}
-		for (num & mask1) != 0 {
+		for data[i]&mask1 != 0 {
 			bit++
 			mask1 >>= 1
 		}
