@@ -8,12 +8,12 @@ func findMaximumXOR(nums []int) int {
 	result := 0
 	mask := 0
 	for i := 31; i >= 0; i-- {
-		mask = mask | (1 << i)
+		mask |= (1 << i)
 		m := make(map[int]bool)
 		for _, num := range nums {
 			m[num&mask] = true
 		}
-		tmp := (1 << i) | result
+		tmp := result | (1 << i)
 		for j := range m {
 			if _, ok := m[tmp^j]; ok {
 				result = tmp
