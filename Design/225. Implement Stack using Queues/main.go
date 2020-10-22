@@ -12,26 +12,26 @@ func Constructor() MyStack {
 	return MyStack{queue: []int{}}
 }
 
+// Pop removes the last item
+func (s *MyStack) Pop() int {
+	item := s.queue[0]
+	s.queue = s.queue[1:]
+	return item
+}
+
 // Push adds an item
 func (s *MyStack) Push(x int) {
 	n := len(s.queue)
 	s.queue = append(s.queue, x)
-	for ; n > 0; n-- {
-		s.queue = append(s.queue, s.queue[0])
-		s.queue = s.queue[1:]
+	for n > 0 {
+		s.queue = append(s.queue, s.Pop())
+		n--
 	}
 }
 
 // Top returns the first tiem
 func (s *MyStack) Top() int {
 	return s.queue[0]
-}
-
-// Pop removes the last item
-func (s *MyStack) Pop() int {
-	item := s.queue[0]
-	s.queue = s.queue[1:]
-	return item
 }
 
 // Empty returns if the stack is empty
