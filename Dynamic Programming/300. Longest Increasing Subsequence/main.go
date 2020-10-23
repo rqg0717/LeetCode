@@ -63,5 +63,5 @@ func lengthOfLIS1(nums []int) int {
 
 func main() {
 	nums := []int{10, 9, 4, 5, 2, 7, 1, 0, 6}
-	fmt.Println("Output: ", lengthOfLIS1(nums))
+	fmt.Println("Output: ", lengthOfLIS(nums))
 }
