@@ -2,41 +2,43 @@ package main
 
 import "fmt"
 
-func max(x, y int) int {
-	if x > y {
-		return x
-	}
-	return y
-}
-
 func findNumberOfLIS(nums []int) int {
 	n := len(nums)
-	if n < 1 {
+	if n == 0 {
 		return 0
 	}
 	dp := make([]int, n)
-	count := 1
-	for i := 0; i < n; i++ {
+	count := make([]int, n)
+	max := 1
+	dp[0] = 1
+	count[0] = 1
+	for i := 1; i < n; i++ {
 		dp[i] = 1
+		count[i] = 1
 		for j := 0; j < i; j++ {
 			if nums[j] < nums[i] {
-				dp[i] = max(dp[i], dp[j]+1)
+				if dp[i] < dp[j]+1 {
+					dp[i] = dp[j] + 1
+					count[i] = count[j]
+				} else if dp[i] == dp[j]+1 {
+					count[i] += count[j]
+				}
 			}
-		}
-		if dp[i] > count {
-			count = dp[i]
+			if dp[i] > max {
+				max = dp[i]
+			}
 		}
 	}
 	result := 0
-	for i := 0; i < n; i++ {
-		if dp[i] == count {
-			result++
+	for i := 0; i < len(count); i++ {
+		if dp[i] == max {
+			result += count[i]
 		}
 	}
 	return result
 }
 
 func main() {
-	nums := []int{1, 3, 5, 4, 7}
+	nums := []int{2, 2, 2, 2, 2}
 	fmt.Println("Output: ", findNumberOfLIS(nums))
 }
