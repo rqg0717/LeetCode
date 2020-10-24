@@ -40,6 +40,6 @@ func entityParser(text string) string {
 }
 
 func main() {
-	text := "x &gt; y &amp;&amp; x &lt; y is always false"
+	text := "&amp; is an HTML entity but &ambassador; is not."
 	fmt.Println("Output: ", entityParser(text))
 }
