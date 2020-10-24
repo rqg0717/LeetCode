@@ -19,18 +19,18 @@ func entityParser(text string) string {
 			result = append(result, text[i])
 			continue
 		}
-		t := make([]byte, 0)
+		special := make([]byte, 0)
 		for j := i; j < n; j++ {
 			i = j
-			t = append(t, text[j])
+			special = append(special, text[j])
 			if text[j] == ';' {
 				break
 			}
 		}
-		if v, ok := m[string(t)]; ok {
+		if v, ok := m[string(special)]; ok {
 			result = append(result, v)
 		} else {
-			for _, v := range t {
+			for _, v := range special {
 				result = append(result, v)
 			}
 		}
