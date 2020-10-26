@@ -62,8 +62,24 @@ func searchMatrix(matrix [][]int, target int) bool {
 	return isFound
 }
 
+func searchMatrix1(matrix [][]int, target int) bool {
+	// start with the bottom left
+	row := len(matrix) - 1
+	column := 0
+	for row >= 0 && column <= (len(matrix[0])-1) {
+		if matrix[row][column] > target {
+			row--
+		} else if matrix[row][column] < target {
+			column++
+		} else {
+			return true
+		}
+	}
+	return false
+}
+
 func main() {
-	target := 16
+	target := 27
 	matrix := [][]int{
 		{1, 4, 7, 11, 15, 17},
 		{2, 5, 8, 12, 19, 20},
@@ -72,5 +88,5 @@ func main() {
 		{18, 21, 23, 26, 28, 30}}
 
 	fmt.Println("input Matrix: ", matrix)
-	fmt.Println("Output: ", searchMatrix(matrix, target))
+	fmt.Println("Output: ", searchMatrix1(matrix, target))
 }
