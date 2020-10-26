@@ -41,11 +41,10 @@ func binarySearch(matrix [][]int, target int, start int, isVertical bool) bool {
 }
 
 func searchMatrix(matrix [][]int, target int) bool {
-	m, n := len(matrix), len(matrix[0])
-	if m == 0 || n == 0 {
+	if len(matrix) == 0 || len(matrix[0]) == 0 {
 		return false
 	}
-	shorter := min(m, n)
+	shorter := min(len(matrix), len(matrix[0]))
 	isFound := false
 	for i := 0; i < shorter; i++ {
 		isFound = binarySearch(matrix, target, i, true)
