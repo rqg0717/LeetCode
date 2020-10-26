@@ -40,6 +40,9 @@ func binarySearch(matrix [][]int, target int, start int, isVertical bool) bool {
 	return false
 }
 
+/**
+ *	O( log(n)+log(n-1)+log(n-2)+...+log(1) ) => O( log(1⋅...⋅(n-2)⋅(n-1)⋅n) ) => O(log(n!))
+ */
 func searchMatrix(matrix [][]int, target int) bool {
 	if len(matrix) == 0 || len(matrix[0]) == 0 {
 		return false
