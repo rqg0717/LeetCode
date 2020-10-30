@@ -1,7 +1,7 @@
 # LeetCode
 ![](https://img.shields.io/badge/status-in_development-green.svg)
 
-LeetCode Questions and my solutions in Golang and C
+LeetCode Questions and my solutions in C, C++, Golang, and Java
 
 
 "Code should be correct, clear and efficient.
