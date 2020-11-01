@@ -9,7 +9,7 @@ type Node struct {
 	Back  *Node
 }
 
-// MyQueue is a double-pointer linked list
+// MyQueue is a struture contains two sentinel nodes
 type MyQueue struct {
 	head *Node
 	tail *Node
