@@ -2,23 +2,23 @@ package main
 
 import "fmt"
 
-// ListNode is a structure
-type ListNode struct {
+// Node is a structure
+type Node struct {
 	Value int
-	Front *ListNode
-	Back  *ListNode
+	Front *Node
+	Back  *Node
 }
 
 // MyQueue is a double-pointer linked list
 type MyQueue struct {
-	head *ListNode
-	tail *ListNode
+	head *Node
+	tail *Node
 }
 
 // Constructor initializes the queue
 func Constructor() MyQueue {
-	head := &ListNode{0, nil, nil}
-	tail := &ListNode{0, nil, nil}
+	head := &Node{0, nil, nil}
+	tail := &Node{0, nil, nil}
 	head.Back = tail
 	tail.Front = head
 
@@ -30,7 +30,7 @@ func (q *MyQueue) Enqueue(val int) {
 	tail := q.tail
 	head := q.tail.Front
 
-	tmp := &ListNode{val, nil, nil}
+	tmp := &Node{val, nil, nil}
 	tmp.Front = head
 	tmp.Back = tail
 	head.Back = tmp
