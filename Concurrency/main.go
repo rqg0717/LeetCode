@@ -38,7 +38,7 @@ func printer(ch1 chan string, ch2 chan bool) {
 		default:
 			msg := <-ch1
 			fmt.Println(msg)
-			time.Sleep(time.Second * 5)
+			time.Sleep(time.Second * 1)
 		}
 	}
 }
