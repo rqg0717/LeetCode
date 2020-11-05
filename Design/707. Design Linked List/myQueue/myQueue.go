@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"errors"
+	"fmt"
+)
 
 // Node is a structure
 type Node struct {
@@ -38,20 +41,28 @@ func (q *MyQueue) Enqueue(val int) {
 }
 
 // Dequeue removes the first node in the front of the queue
-func (q *MyQueue) Dequeue() {
+func (q *MyQueue) Dequeue() (int, error) {
 	if q.head.Back == q.tail {
-		return
+		return -1, errors.New("empty queue")
 	}
+	ret := q.head.Back.Value
 	q.head.Back = q.head.Back.Back
+	return ret, nil
 }
 
 func main() {
-	myQueue := Constructor()
-	myQueue.Dequeue()
-	myQueue.Enqueue(1)
-	myQueue.Enqueue(2)
-	myQueue.Enqueue(3)
-	myQueue.Dequeue()
-	myQueue.Dequeue()
-	fmt.Println("myQueue Front is: ", myQueue.head.Back.Value) // return 3
+	q := Constructor()
+	data, err := q.Dequeue()
+	if err != nil {
+		fmt.Println(err)
+	}
+	q.Enqueue(1)
+	q.Enqueue(2)
+	q.Enqueue(3)
+	data, err = q.Dequeue()
+	if err == nil {
+		fmt.Println("myQueue Front is: ", data) // return 1
+	}
+	q.Dequeue()
+	fmt.Println("myQueue Front is: ", q.head.Back.Value) // return 3
 }
