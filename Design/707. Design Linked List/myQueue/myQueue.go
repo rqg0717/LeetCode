@@ -42,6 +42,7 @@ func (q *MyQueue) Dequeue() {
 	if q.head.Back == q.tail {
 		return
 	}
+	
 	q.head.Back = q.head.Back.Back
 }
 
